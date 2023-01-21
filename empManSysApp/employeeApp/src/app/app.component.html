@@ -1,0 +1,92 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand">Employee Management</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#exampleModal">
+      Add Employee
+    </button>
+  </form>
+</nav>
+
+<input  [(ngModel)]="searchText" placeholder="Search..."/>
+<div class="container">
+  <table class="table table-dark" >
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Education</th>
+        <th scope="col">Company</th>
+        <th scope="col">Salary</th>
+        <th scope="col">BirthDate</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Work experience</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of allEmployees | appFilter: searchText">
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.education }}</td>
+        <td>{{ employee.company }}</td>        
+        <td>{{ employee.salary }} HUF</td>
+        <td>{{ employee.birthDate }}</td>
+        <td>{{ employee.gender }}</td>
+        <td>{{ employee.workExperience }} years</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Employee data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="employeeForm">
+          <div class="form-group">
+            <label for="exampleInputName">Name</label>
+            <input formControlName="name" type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" placeholder="Enter name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEducation">Education</label>
+            <input formControlName="education" type="text" class="form-control" id="exampleInputEducation" aria-describedby="educationHelp" placeholder="Enter education">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputCompany">Company</label>
+            <input formControlName="company" type="text" class="form-control" id="exampleInputCompany" aria-describedby="companyHelp" placeholder="Enter company">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputSalary">Salary</label>
+            <input formControlName="salary" type="number" class="form-control" id="exampleInputSalary" aria-describedby="salaryHelp" placeholder="Enter salary">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputBirthDate">BirthDate</label>
+            <input formControlName="birthDate" type="date" class="form-control" id="exampleInputBirthDate" aria-describedby="birthDateHelp" placeholder="Enter birthdate">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputGender">Gender</label>
+            <select formControlName="gender" style="width: 100%;" class="form-select form-control" aria-label="Default select example">
+              <option selected value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputWorkExperience">Work Experience</label>
+            <input formControlName="workExperience" type="number" class="form-control" id="exampleInputWorkExperience" aria-describedby="workExperienceHelp" placeholder="Enter Work Experience">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button [disabled]="employeeForm.invalid" (click)="addEmployee()" data-dismiss="modal" type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+{
+  "employees": [
+    {
+      "name": "Bela Kiss",
+      "education": "Codecool",
+      "company": "Codecool",
+      "salary": 120000,
+      "birthDate": "2023-01-13",
+      "gender": "male",
+      "workExperience": 12,
+      "id": 1
+    },
+    {
+      "name": "Lajos Nagy",
+      "education": "SZTE",
+      "company": "evosoft",
+      "salary": 250000,
+      "birthDate": "2023-01-20",
+      "gender": "female",
+      "workExperience": 20,
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
