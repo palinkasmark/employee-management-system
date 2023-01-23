@@ -1,24 +1,24 @@
 {
   "employees": [
     {
-      "name": "Bela Kiss",
-      "education": "Codecool",
-      "company": "Codecool",
-      "salary": 120000,
-      "birthDate": "2023-01-13",
+      "name": "Farkas Tivadar",
+      "education": "SZFE",
+      "company": "Katona Színház",
+      "salary": 870000,
+      "birthDate": "1990-05-12",
       "gender": "male",
       "workExperience": 12,
-      "id": 1
+      "id": 6
     },
     {
-      "name": "Lajos Nagy",
+      "name": "Kovács Béla",
       "education": "SZTE",
-      "company": "evosoft",
-      "salary": 250000,
-      "birthDate": "2023-01-20",
-      "gender": "female",
-      "workExperience": 20,
-      "id": 2
+      "company": "evosfot",
+      "salary": 555000,
+      "birthDate": "1965-08-15",
+      "gender": "male",
+      "workExperience": 34,
+      "id": 7
     }
   ],
   "comments": [

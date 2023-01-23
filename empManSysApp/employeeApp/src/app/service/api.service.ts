@@ -20,4 +20,12 @@ export class ApiService {
     return this.http.get<EmployeeData>("http://localhost:3000/employees");
   }
 
+  putEmployee(data: EmployeeData, id: number) {
+    return this.http.put<EmployeeData>("http://localhost:3000/employees/" + id, data);
+  }
+
+  deleteEmployee(id: number) {
+    return this.http.delete<EmployeeData>("http://localhost:3000/employees/" + id);
+  }
+
 }

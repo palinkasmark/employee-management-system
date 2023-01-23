@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
   employeeForm!: FormGroup;
   allEmployees: any;
   searchText: string = '';
-
+  actionBtn: boolean = false;
+  editedEmployeeId!: number;
 
   constructor(private formBuilder: FormBuilder,
     private api: ApiService){}
@@ -35,15 +36,47 @@ export class AppComponent implements OnInit {
     this.getEmployees();
   }
 
+  add() {
+    this.actionBtn = true;
+    this.employeeForm.reset();
+  }
+
   addEmployee() {
     this.api.postEmployee(this.employeeForm.value).subscribe((res) => {
       this.employeeForm.reset();
+      this.getEmployees();
     });
   }
 
   getEmployees() {
     this.api.getEmployees().subscribe((res) => {
       this.allEmployees = res;
+    });
+  }
+
+  editEmployeeForm(employee: EmployeeData) {
+    this.actionBtn = false;
+    this.employeeForm.controls['name'].setValue(employee.name);
+    this.employeeForm.controls['education'].setValue(employee.education);
+    this.employeeForm.controls['company'].setValue(employee.company);
+    this.employeeForm.controls['salary'].setValue(employee.salary);
+    this.employeeForm.controls['birthDate'].setValue(employee.birthDate);
+    this.employeeForm.controls['gender'].setValue(employee.gender);
+    this.employeeForm.controls['workExperience'].setValue(employee.workExperience);
+    this.editedEmployeeId = employee.id;
+  }
+
+  editEmployee() {
+    this.api.putEmployee(this.employeeForm.value, this.editedEmployeeId)
+    .subscribe((res) => {
+      this.employeeForm.reset();
+      this.getEmployees();
+    });
+  }
+
+  deleteEmployee(employee: EmployeeData) {
+    this.api.deleteEmployee(employee.id).subscribe((res) => {
+      this.getEmployees();
     });
   }
 

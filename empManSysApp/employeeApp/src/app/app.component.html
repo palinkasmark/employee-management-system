@@ -1,19 +1,18 @@
-<nav class="navbar navbar-light bg-light justify-content-between">
+<nav class="navbar navbar-light bg-light justify-content-between border-bottom border-dark">
   <a class="navbar-brand">Employee Management</a>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#exampleModal">
+  <div class="nav-container">
+    <input  [(ngModel)]="searchText" placeholder="Search..."/>
+    <button (click)="add()" type="button" class="btn btn-primary m-2"
+    data-toggle="modal" data-target="#exampleModal">
       Add Employee
     </button>
-  </form>
+  </div>
 </nav>
 
-<input  [(ngModel)]="searchText" placeholder="Search..."/>
 <div class="container">
   <table class="table table-dark" >
     <thead>
-      <tr>
+      <tr class="text-center">
         <th scope="col">Name</th>
         <th scope="col">Education</th>
         <th scope="col">Company</th>
@@ -21,17 +20,29 @@
         <th scope="col">BirthDate</th>
         <th scope="col">Gender</th>
         <th scope="col">Work experience</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee of allEmployees | appFilter: searchText">
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.education }}</td>
-        <td>{{ employee.company }}</td>        
-        <td>{{ employee.salary }} HUF</td>
-        <td>{{ employee.birthDate }}</td>
-        <td>{{ employee.gender }}</td>
-        <td>{{ employee.workExperience }} years</td>
+      <tr class="text-center" *ngFor="let employee of allEmployees | appFilter: searchText">
+        <td class="align-middle">{{ employee.name }}</td>
+        <td class="align-middle">{{ employee.education }}</td>
+        <td class="align-middle">{{ employee.company }}</td>
+        <td class="align-middle">{{ employee.salary }} HUF</td>
+        <td class="align-middle">{{ employee.birthDate }}</td>
+        <td class="align-middle">{{ employee.gender }}</td>
+        <td class="align-middle">{{ employee.workExperience }} years</td>
+        <td class="align-middle">
+          <button data-toggle="modal" data-target="#exampleModal"
+          (click)="editEmployeeForm(employee)"
+          class="btn btn-primary btn-sm mr-2">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteEmployee(employee)"
+          class="btn btn-danger btn-sm">
+          <mat-icon>delete</mat-icon>
+        </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -85,7 +96,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button [disabled]="employeeForm.invalid" (click)="addEmployee()" data-dismiss="modal" type="button" class="btn btn-primary">Save</button>
+        <button *ngIf="actionBtn" [disabled]="employeeForm.invalid"
+        (click)="addEmployee()"
+        data-dismiss="modal" type="button" class="btn btn-primary">Save</button>
+        <button *ngIf="!actionBtn" [disabled]="employeeForm.invalid"
+        (click)="editEmployee()"
+        data-dismiss="modal" type="button" class="btn btn-primary">Update</button>
       </div>
     </div>
   </div>
